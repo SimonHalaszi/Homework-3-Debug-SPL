@@ -14,7 +14,7 @@ def main():
     
     # Check for command line arguments
     if len(sys.argv) > 1:
-        # Parse arguments for filename and watch option
+        # Parse arguments for filename and watch command line argument
         filename = None
         for arg in sys.argv[1:]:
             if arg.startswith('watch='):
@@ -29,7 +29,7 @@ def main():
             try:
                 tokens = tokenize(source_code)
                 ast = parse(tokens)
-                final_value, exit_status = evaluate(ast, environment, watch_var=watch_var, source_code=source_code)
+                final_value, exit_status = evaluate(ast, environment, watch_var, source_code)
                 if exit_status == "exit":
                     sys.exit(final_value if isinstance(final_value, int) else 0)
             except Exception as e:
@@ -52,7 +52,7 @@ def main():
                 # Tokenize, parse, and execute the code
                 tokens = tokenize(source_code)
                 ast = parse(tokens)
-                final_value, exit_status = evaluate(ast, environment, watchvar=None)
+                final_value, exit_status = evaluate(ast, environment, None)
                 if exit_status == "exit":
                     print(f"Exiting with code: {final_value}") # REPL can print this
                     sys.exit(final_value if isinstance(final_value, int) else 0)
